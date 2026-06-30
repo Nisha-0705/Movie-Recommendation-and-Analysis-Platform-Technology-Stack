@@ -13,8 +13,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET =
-            "MovieRecommendationPlatformSecretKeyForJwtAuthentication2026@123456789ABCDEF";
+     @Value("${jwt.secret}")
+private String SECRET;
 
     private final Key key =
             Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));

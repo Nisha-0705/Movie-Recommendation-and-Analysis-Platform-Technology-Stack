@@ -29,14 +29,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getServletPath();
 
-        // Skip auth APIs
-         if (path.startsWith("/auth")
-        || path.startsWith("/api/auth")
-        || request.getMethod().equals("OPTIONS")) {
-
-    filterChain.doFilter(request,response);
-    return;
-}
+        if (path.startsWith("/auth") || path.startsWith("/api/auth")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String authHeader = request.getHeader("Authorization");
 
@@ -52,20 +48,15 @@ public class JwtFilter extends OncePerRequestFilter {
                         new UsernamePasswordAuthenticationToken(
                                 email,
                                 null,
-                                AuthorityUtils.NO_AUTHORITIES
-                        );
+                                AuthorityUtils.NO_AUTHORITIES);
 
-                SecurityContextHolder
-                        .getContext()
-                        .setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
             } else {
 
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 return;
-
             }
-
         }
 
         filterChain.doFilter(request, response);

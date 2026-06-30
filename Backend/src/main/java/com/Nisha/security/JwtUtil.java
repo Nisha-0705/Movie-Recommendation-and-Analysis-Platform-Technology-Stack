@@ -1,9 +1,11 @@
-package com.Nisha.security;
+ package com.Nisha.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -13,11 +15,14 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-     @Value("${jwt.secret}")
-private String SECRET;
+    @Value("${jwt.secret}")
+    private String SECRET;
 
-    private final Key key =
-            Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(
+                SECRET.getBytes(StandardCharsets.UTF_8)
+        );
+    }
 
     public String generateToken(String email) {
 
@@ -25,14 +30,14 @@ private String SECRET;
                 .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(key, SignatureAlgorithm.HS256)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public String extractEmail(String token) {
 
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -45,14 +50,16 @@ private String SECRET;
         try {
 
             Jwts.parserBuilder()
-                    .setSigningKey(key)
+                    .setSigningKey(getSigningKey())
                     .build()
                     .parseClaimsJws(token);
 
             return true;
 
         } catch (Exception e) {
+
             return false;
+
         }
     }
 }

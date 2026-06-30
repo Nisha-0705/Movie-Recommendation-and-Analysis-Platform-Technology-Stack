@@ -1,4 +1,6 @@
-package com.Nisha.security;
+ package com.Nisha.security;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -6,15 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.util.List;
-
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -23,66 +20,77 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     @Autowired
-    JwtFilter jwtFilter;
+    private JwtFilter jwtFilter;
 
     @Autowired
-    JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    // =========================
+    // CORS Configuration
+    // =========================
     @Bean
-CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource() {
 
-    CorsConfiguration configuration = new CorsConfiguration();
+        CorsConfiguration configuration = new CorsConfiguration();
 
-    configuration.setAllowedOrigins(List.of(
-            "https://movie-recommendation-and-analysis-p.vercel.app"
-    ));
+        // Allow all Vercel deployments
+        configuration.setAllowedOriginPatterns(List.of(
+                "https://*.vercel.app"
+        ));
 
-    configuration.setAllowedMethods(List.of(
-            "GET",
-            "POST",
-            "PUT",
-            "DELETE",
-            "OPTIONS"
-    ));
+        configuration.setAllowedMethods(List.of(
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "OPTIONS"
+        ));
 
-    configuration.setAllowedHeaders(List.of("*"));
-    configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setExposedHeaders(List.of("*"));
 
-    UrlBasedCorsConfigurationSource source =
-            new UrlBasedCorsConfigurationSource();
+        configuration.setAllowCredentials(true);
 
-    source.registerCorsConfiguration("/**", configuration);
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
 
-    return source;
-}
+        source.registerCorsConfiguration("/**", configuration);
 
+        return source;
+    }
+
+    // =========================
+    // Spring Security
+    // =========================
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http)
-            throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http   
-                 .cors(cors -> {})
+        http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
 
-                 .sessionManagement(session ->
-        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-    )
-    
-               .authorizeHttpRequests(auth -> auth
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                .requestMatchers("/auth/**", "/api/auth/**").permitAll()
+                .authorizeHttpRequests(auth -> auth
 
-                 .requestMatchers(HttpMethod.GET,"/api/movies/**").permitAll()
-                  
-                 
+                        // Public Auth APIs
+                        .requestMatchers("/auth/**", "/api/auth/**").permitAll()
 
-                 .anyRequest().authenticated()
+                        // Public Movie APIs
+                        .requestMatchers(HttpMethod.GET, "/api/movies/**").permitAll()
 
-                )
+                        // Allow OPTIONS requests
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                        // Everything else requires login
+                        .anyRequest().authenticated())
+
                 .exceptionHandling(ex ->
                         ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
 

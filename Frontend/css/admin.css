@@ -1,0 +1,259 @@
+ /* ============================================================
+   admin.css
+   CineVault Admin Panel — Premium Redesign
+   NOTE: All original class/element selectors preserved.
+   Only visual styling (colors, spacing, effects, typography)
+   has been upgraded. No HTML/JS changes required.
+============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+    --cv-bg: #14141A;
+    --cv-bg-secondary: #1B1B22;
+    --cv-card: #20202A;
+    --cv-primary: #E15A5F;
+    --cv-accent: #EAC177;
+    --cv-text: #F5F5F5;
+    --cv-gray: #ABABB5;
+}
+
+/* ---------- PAGE ---------- */
+
+body {
+    background: var(--cv-bg);
+    color: var(--cv-text);
+    font-family: 'Inter', sans-serif;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.cv-navbar {
+    background: rgba(21, 21, 21, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.navbar-brand{
+    color: var(--cv-primary) !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: .5px;
+}
+
+.nav-link{
+    color: var(--cv-gray) !important;
+    font-weight: 500;
+    transition: color .3s ease;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    color: var(--cv-text) !important;
+}
+
+.nav-link.active{
+    color: var(--cv-primary) !important;
+}
+
+/* ---------- CARDS ---------- */
+
+.admin-card{
+    background: linear-gradient(145deg, var(--cv-card), #181818);
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.06);
+    transition: all .4s cubic-bezier(.25,.8,.25,1);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle at top right, rgba(225,90,95,.10), transparent 60%);
+    opacity:0;
+    transition: opacity .4s ease;
+}
+
+.admin-card:hover::before{
+    opacity:1;
+}
+
+.admin-card:hover{
+    transform: translateY(-8px);
+    border-color: rgba(225,90,95,.28);
+    box-shadow: 0 20px 40px rgba(225,90,95,.16), 0 0 0 1px rgba(225,90,95,.07) inset;
+}
+
+.admin-icon{
+    font-size: 38px;
+    color: var(--cv-primary);
+    margin-bottom: 16px;
+    filter: drop-shadow(0 4px 12px rgba(225,90,95,.28));
+}
+
+.admin-card h5{
+    color: var(--cv-gray);
+    font-weight: 500;
+    font-size: .95rem;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 10px;
+}
+
+.admin-card h2{
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    color: var(--cv-text);
+    font-weight: 700;
+}
+
+/* ---------- TABLE ---------- */
+
+.table{
+    margin-bottom: 0;
+    color: var(--cv-text);
+}
+
+.table thead{
+    background: var(--cv-bg-secondary);
+}
+
+.table th{
+    color: var(--cv-accent);
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    padding: 16px 14px;
+}
+
+.table td{
+    vertical-align: middle;
+    border-color: rgba(255,255,255,.06);
+    padding: 14px;
+    background: transparent;
+}
+
+.table-hover tbody tr{
+    transition: background .25s ease;
+}
+
+.table-hover tbody tr:hover{
+    background: rgba(225,90,95,.06);
+}
+
+/* ---------- SEARCH / INPUTS ---------- */
+
+.form-control{
+    background: var(--cv-bg-secondary);
+    color: var(--cv-text);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
+    padding: 10px 14px;
+    transition: all .25s ease;
+}
+
+.form-control::placeholder{
+    color: #777;
+}
+
+.form-control:focus{
+    background: var(--cv-bg-secondary);
+    color: var(--cv-text);
+    border-color: var(--cv-primary);
+    box-shadow: 0 0 0 3px rgba(225,90,95,.14);
+}
+
+/* ---------- BUTTONS ---------- */
+
+.btn-danger{
+    background: var(--cv-primary);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all .25s ease;
+}
+
+.btn-danger:hover{
+    background: #eb6b6f;
+    box-shadow: 0 8px 18px rgba(225,90,95,.28);
+    transform: translateY(-2px);
+}
+
+.btn-warning{
+    color: #1a1a1a;
+    background: var(--cv-accent);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all .25s ease;
+}
+
+.btn-warning:hover{
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+}
+
+.btn-sm{
+    margin-right: 6px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* ---------- EMPTY STATE ---------- */
+
+.no-data{
+    padding: 70px 20px;
+    text-align: center;
+    color: var(--cv-gray);
+}
+
+.no-data i{
+    font-size: 58px;
+    color: #3a3a3a;
+    margin-bottom: 18px;
+    display: block;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width: 992px){
+    .admin-card{
+        margin-bottom: 20px;
+    }
+}
+
+@media(max-width: 768px){
+    .table{
+        font-size: 14px;
+    }
+    .admin-card h2{
+        font-size: 32px;
+    }
+    .admin-icon{
+        font-size: 30px;
+    }
+}
+
+@media(max-width: 576px){
+    .container{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .table{
+        font-size: 13px;
+    }
+    .btn{
+        font-size: 13px;
+    }
+}

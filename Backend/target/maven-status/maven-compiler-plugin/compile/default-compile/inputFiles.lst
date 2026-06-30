@@ -1,0 +1,17 @@
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\config\CorsConfig.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\config\DataLoader.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\controller\AuthController.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\controller\MovieController.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\model\LoginRequest.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\model\LoginResponse.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\model\Movie.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\model\User.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\MovieRecommendationApplication.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\repository\MovieRepository.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\repository\UserRepository.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\security\JwtAuthenticationEntryPoint.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\security\JwtFilter.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\security\JwtUtil.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\security\SecurityConfig.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\service\MovieService.java
+C:\LENOVO\OneDrive\Documents\Attachments\Desktop\Movie_Project_LnT\Movie-Project\Backend\src\main\java\com\Nisha\service\UserService.java

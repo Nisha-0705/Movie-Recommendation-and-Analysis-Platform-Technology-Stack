@@ -3,7 +3,7 @@
    CineVault API Service
 ============================================================ */
 
-export const BASE_URL = "https://movie-recommendation-and-analysis.onrender.com/";
+export const BASE_URL = "https://movie-recommendation-and-analysis.onrender.com";
 
 /* ---------------- TOKEN ---------------- */
 
